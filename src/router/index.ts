@@ -28,6 +28,10 @@ const router = createRouter({
 				if (!UID) return "/login";
 			},
 		},
+		{
+			path: '/:pathMatch(.*)*',
+			redirect: '/',
+		},
 	],
 });
 
