@@ -25,7 +25,7 @@ watch(
 const percentage = computed(() => {
 	try {
 		if (totalTasks.value === 0) return 0;
-		return Math.floor((completedTasks.value / totalTasks.value) * 100);
+		return ((completedTasks.value / totalTasks.value) * 100).toFixed(2);
 	} catch (e) {
 		return 0;
 	}
