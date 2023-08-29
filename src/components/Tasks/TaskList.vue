@@ -41,11 +41,13 @@ emitter.on(`task-edited-${status}`, (updatedTask: any) => {
 
 emitter.on(`task-created-${status}`, (newTask: any) => {
 	list.value = [newTask, ...list.value];
+	emitter.emit(`progress-on-task-create`, status);
 });
 
 //called from TaskCard.vue
 emitter.on(`task-deleted-${status}`, (taskId) => {
 	list.value = list.value.filter((task) => task.id !== taskId);
+	emitter.emit(`progress-on-task-delete`, status);
 });
 
 const handleScroll = (el: any) => {

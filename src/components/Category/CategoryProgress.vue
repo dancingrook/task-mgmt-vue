@@ -31,6 +31,21 @@ const percentage = computed(() => {
 	}
 });
 
+emitter.on('progress-on-task-create', (status) => {
+	if(status == 'done') {
+		completedTasks.value++;
+	}
+	totalTasks.value++
+})
+
+
+emitter.on('progress-on-task-delete', (status) => {
+	if(status == 'done') {
+		completedTasks.value--;
+	}
+	totalTasks.value--
+})
+
 //called from Tasks List
 emitter.on("update-progress", ({ prevStatus, updatedStatus }) => {
 	if (updatedStatus === "done") completedTasks.value++;
