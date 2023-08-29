@@ -27,11 +27,21 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+## Copy Env File 
+```sh
+cp .env.example .env.local
+```
+## REPLACE WITH API_URL
+VITE__API_URI=http://localhost:8000
+
+
 ### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
 ```
+
+
 
 ### Type-Check, Compile and Minify for Production
 
