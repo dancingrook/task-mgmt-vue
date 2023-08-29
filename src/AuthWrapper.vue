@@ -13,8 +13,8 @@ onMounted(async () => {
 		await router.isReady();
 		if (route.name == "home") await me();
 	} catch (e) {
-		localStorage.removeItem('UID')
-		router.push('/login')
+		localStorage.removeItem("UID");
+		location.reload();
 	}
 });
 </script>

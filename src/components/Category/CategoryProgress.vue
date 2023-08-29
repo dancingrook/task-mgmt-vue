@@ -7,8 +7,8 @@ import { inject, ref, computed, watch } from "vue";
 const categoryStore = useCategoryStore();
 const emitter = inject("emitter");
 
-const totalTasks = ref(categoryStore.category.tasks_count);
-const completedTasks = ref(categoryStore.completed_tasks_count);
+const totalTasks = ref(0);
+const completedTasks = ref(0);
 
 watch(
 	() => categoryStore.category,
@@ -24,6 +24,7 @@ watch(
 // a computed ref
 const percentage = computed(() => {
 	try {
+		if (totalTasks.value === 0) return 0;
 		return Math.floor((completedTasks.value / totalTasks.value) * 100);
 	} catch (e) {
 		return 0;
@@ -44,11 +45,11 @@ emitter.on("update-progress", ({ prevStatus, updatedStatus }) => {
 				<img class="category-image" :src="`https://ui-avatars.com/api/?name=${categoryStore.category.name}`" alt="avatar" />
 				<div class="category-details">
 					<span class="category-title"> {{ categoryStore.category.name }}</span>
-					<div class="bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 progress-bar">
+					<div class="bg-gray-200 rounded-full h-2.5 progress-bar">
 						<div class="bg-indigo-500 h-2.5 rounded-full" style="width: 60%" :style="{ width: `${percentage}%` }"></div>
 					</div>
 
-					<span class="completion-percentage">{{ percentage }} % complete</span>
+					<span class="completion-percentage">{{ percentage ?? 0 }} % complete</span>
 				</div>
 			</div>
 		</div>
